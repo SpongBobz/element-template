@@ -1,0 +1,15 @@
+@import "./variables.scss";
+@import "./mixin.scss";
+@import "./cus-element.scss";
+
+html,
+body {
+  font-size: 16px;
+  color: #fff;
+  min-width: 1366px;
+  margin: 0;
+}
+// 全局修改滚动条样式
+* {
+  @include scrollBar();
+}

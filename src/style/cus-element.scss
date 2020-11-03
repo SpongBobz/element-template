@@ -1,0 +1,34 @@
+// table
+.el-table.cus-table {
+  // header
+  th {
+    background-color: #174468;
+    color: #fff;
+  }
+  // td
+  td {
+    background-color: #5787ad;
+    color: #fff;
+  }
+  // houver && select
+  .el-table__body {
+    tr:hover > td {
+      background-color: #3778ac;
+    }
+    tr.current-row > td {
+      background-color: #3778ac;
+    }
+  }
+  // border
+  th.is-leaf,
+  td {
+    border-color: #8d9ca8;
+  }
+  // 空数据
+  .el-table__empty-block {
+    background-color: #5787ad;
+    .el-table__empty-text {
+      color: #fff;
+    }
+  }
+}
