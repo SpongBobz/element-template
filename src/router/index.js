@@ -1,5 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import NProgress from "nprogress"; // progress bar
+import "nprogress/nprogress.css"; // progress bar style
 import { getAccessToken } from "@/util/auth";
 import Layout from "@/layouts";
 // import store from "@/store";
@@ -36,6 +38,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
+  NProgress.start();
   let token = getAccessToken();
   console.log(token);
   document.title = to.meta.title ? to.meta.title : "成都市监测数据管理系统";
@@ -60,5 +63,9 @@ router.beforeEach(async (to, from, next) => {
       window.location.href = "/login";
     }
   }
+});
+
+router.afterEach(() => {
+  NProgress.done();
 });
 export default router;
