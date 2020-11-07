@@ -7,16 +7,12 @@ import { Message } from "element-ui";
 const request = axios.create({
   // API 请求的默认前缀
   baseURL:
-    process.env.NODE_ENV === "development"
-      ? "/Api"
-      : "http://192.168.2.20:8899",
-  timeout: 300000 // 请求超时时间
+    process.env.NODE_ENV === "development" ? "" : window.geodp.appconst.baseAPI,
+  timeout: window.geodp.appconst.requestTimeout // 请求超时时间
 });
-
 // 异常拦截处理器
 const errorHandler = errorRep => {
   if (errorRep.response) {
-    console.log(errorRep.response);
     const { data, status } = errorRep.response;
     // 身份验证失败
     if (status === 401) {
@@ -49,7 +45,9 @@ request.interceptors.request.use(config => {
 
 // 请求后拦截
 request.interceptors.response.use(response => {
-  if (!response.data.Success) {
+  if (response.request && response.request.responseType == "blob") {
+    return response;
+  } else if (response.data && !response.data.Success) {
     Message.error(response.data.Message);
   }
   return response.data;

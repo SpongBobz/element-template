@@ -1,8 +1,9 @@
-import { login, getUserInfo } from "@/api/user";
+import { login, getUser } from "@/api/user";
 import { getAccessToken, setAccessToken, removeAccessToken } from "@/util/auth";
 
 const state = {
-  user: null, // 用户信息
+  userInfo: null, // 用户信息
+  menuList: [],
   accessToken: getAccessToken(), // token
   updateSize: null,
   changeNum: 0
@@ -13,7 +14,8 @@ const mutations = {
     state.accessToken = accessToken;
   },
   _setUser(state, user) {
-    state.user = user;
+    state.userInfo = user.User;
+    state.menuList = user.Module;
   },
   _setUpdateSize(state, value) {
     state.updateSize = value;
@@ -34,12 +36,12 @@ const actions = {
    */
   login({ commit }, userInfo) {
     return login(userInfo)
-      .then(result => {
+      .then(async result => {
         if (result.Success) {
           commit("_setAccessToken", result.Data);
           setAccessToken(result.Data);
+          return result;
         }
-        return result;
       })
       .catch(error => {
         return error;
@@ -49,9 +51,21 @@ const actions = {
    * @description 获取用户信息
    */
   async getUserInfo({ commit }) {
-    return await getUserInfo().then(userInfo => {
-      commit("_setUser", userInfo);
-      return userInfo;
+    return await getUser().then(res => {
+      if (res.Success) {
+        let data = res.Data;
+        if (data.Module && data.Module.length) {
+          data.Module = data.Module.map(item => {
+            return { ...item, url: item.Name.substring(4).toLowerCase() };
+          });
+          commit("_setUser", data);
+          return { flag: true, path: "/" + data.Module[0].url };
+        } else {
+          this.dispatch("user/logout");
+          return false;
+        }
+      }
+      return res;
     });
   },
 
@@ -61,7 +75,7 @@ const actions = {
   logout({ commit }) {
     removeAccessToken();
     commit("_setAccessToken", null);
-    commit("_setUser", null);
+    commit("_setUser", {});
   }
 };
 

@@ -179,6 +179,6 @@ export default {
 <style lang="scss" scoped>
 .pagination {
   margin-top: 20px;
-  text-align: center;
+  text-align: right;
 }
 </style>

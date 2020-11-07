@@ -9,6 +9,10 @@ import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
 
+// 引入iconfont
+import IconFont from "@/components/Icon/index.js";
+Vue.use(IconFont);
+
 // 引入公用scss
 import "@/style/index.scss"; // global css
 Vue.use(ElementUI);

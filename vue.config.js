@@ -1,7 +1,7 @@
 module.exports = {
   publicPath: process.env.NODE_ENV === "production" ? "./" : "/",
-  //生成的生产环境构建文件的目录
-  outputDir: "mnt",
+  // 生成的生产环境构建文件的目录
+  outputDir: "manage",
   //静态资源 (js、css、img、fonts) 目录 (相对于 outputDir 的)
   assetsDir: "assets",
   //指定生成的 index.html 的输出路径 (相对于 outputDir)
@@ -18,11 +18,11 @@ module.exports = {
     port: 3000,
     proxy: {
       "^/Api": {
-        target: "http://192.168.2.20:8899/",
-        ws: true,
-        changeOrigin: true,
+        target: "http://192.168.2.20:8899",
+        // ws: true,
+        // changeOrigin: true,
         pathRewrite: {
-          "^/Api": "/"
+          "^/Api": "/Api"
         }
       }
     }
