@@ -6,6 +6,7 @@
       :stripe="options.stripe"
       class="cus-table"
       :border="options.border"
+      :height="options.height"
       @selection-change="handleSelectionChange"
       @current-change="handleCurrentChange"
       header-row-class-name="table-header-row"

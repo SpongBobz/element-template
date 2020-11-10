@@ -4,6 +4,8 @@
 }
 // table
 .el-table.cus-table {
+  background-color: #113857;
+  border-left: 1px solid #8d9ca8;
   // header
   th {
     background-color: #125c87;
@@ -30,7 +32,7 @@
   }
   &.el-table--border,
   &.el-table--group {
-    border: none;
+    border-top: none;
     &::after,
     &::before {
       background-color: #8d9ca8;
@@ -38,10 +40,9 @@
   }
   .el-table__header-wrapper {
     border-top: 1px solid #8d9ca8;
-    border-left: 1px solid #8d9ca8;
   }
   .el-table__body-wrapper {
-    border-left: 1px solid #8d9ca8;
+    background-color: #113857;
   }
   // 空数据
   .el-table__empty-block {

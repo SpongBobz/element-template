@@ -18,34 +18,40 @@
         <el-button class="reset" @click="reset">重置</el-button>
       </el-form-item>
     </el-form>
-    <Com-Table
-      :columns="columns"
-      :dataSource="tableData"
-      :options="options"
-      :fetch="getTabData"
-      :pagination="pagination"
-      :pageSizes="pageSizes"
-    >
-      <template slot="func" slot-scope="scoped">
-        <el-button
-          size="mini"
-          @click="editFunc(scoped.row)"
-          type="success"
-          style="margin-right: 5px"
-          >功能权限</el-button
-        >
-        <el-button
-          size="mini"
-          @click="editData(scoped.row)"
-          type="success"
-          style="margin-right: 5px"
-          >数据权限</el-button
-        >
-        <el-button size="mini" @click="editApproval(scoped.row)" type="success"
-          >审批权限</el-button
-        >
-      </template>
-    </Com-Table>
+    <div class="tab-content">
+      <Com-Table
+        :columns="columns"
+        :dataSource="tableData"
+        :options="options"
+        :fetch="getTabData"
+        :pagination="pagination"
+        :pageSizes="pageSizes"
+        style="height: 100%"
+      >
+        <template slot="func" slot-scope="scoped">
+          <el-button
+            size="mini"
+            @click="editFunc(scoped.row)"
+            type="success"
+            style="margin-right: 5px"
+            >功能权限</el-button
+          >
+          <el-button
+            size="mini"
+            @click="editData(scoped.row)"
+            type="success"
+            style="margin-right: 5px"
+            >数据权限</el-button
+          >
+          <el-button
+            size="mini"
+            @click="editApproval(scoped.row)"
+            type="success"
+            >审批权限</el-button
+          >
+        </template>
+      </Com-Table>
+    </div>
     <RoleAuthdialog ref="roleAuthdialog" />
     <ApprovalDialog ref="approvalDialog" />
     <DataAuthDialog ref="dataAuthDialog" />
@@ -111,11 +117,12 @@ export default {
       pagination: {
         total: 0,
         pageIndex: 1,
-        pageSize: 12
+        pageSize: 15
       },
-      pageSizes: [12, 14, 20, 50],
+      pageSizes: [10, 15, 30, 40, 60],
       treeLoading: false,
       options: {
+        height: "calc(100% - 62px)",
         mutiSelect: false,
         index: true, // 显示序号， 多选则 mutiSelect
         loading: false, // 表格动画
@@ -154,7 +161,7 @@ export default {
       this.pagination = {
         total: 0,
         pageIndex: 1,
-        pageSize: 12
+        pageSize: 15
       };
       this.getTabData();
     },

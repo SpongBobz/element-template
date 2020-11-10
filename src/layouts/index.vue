@@ -4,7 +4,7 @@
       <div class="header-title">
         <img
           style="margin-right: 20px"
-          src="https://via.placeholder.com/160x60"
+          src="@/assets/imgs/heder-logo.png"
           alt=""
         />
         <span>智慧城建档案馆--地下管网运维管理</span>

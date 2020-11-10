@@ -27,13 +27,18 @@
               <span class="tree-icon">
                 <icon-font :type="node.level > 1 ? 'organization' : 'jg'" />
               </span>
-              <span class="org-name" :title="node.label">{{ node.label }}</span>
+              <span
+                class="org-name"
+                :style="{ width: 148 - (node.level - 1) * 18 + 'px' }"
+                :title="node.label"
+                >{{ node.label }}</span
+              >
             </span>
             <span class="bun-goup">
               <el-button
                 type="text"
                 icon="el-icon-edit"
-                @click.stop.prevent="editOrg(data)"
+                @click.stop.prevent="editOrg(data, node)"
               >
               </el-button>
               <el-popconfirm
@@ -80,6 +85,7 @@
         :fetch="getTabData"
         :pagination="pagination"
         :pageSizes="pageSizes"
+        style="height: calc(100% - 62px);"
       >
         <template slot="func" slot-scope="scoped">
           <el-button
@@ -173,11 +179,12 @@ export default {
       pagination: {
         total: 0,
         pageIndex: 1,
-        pageSize: 12
+        pageSize: 15
       },
-      pageSizes: [12, 14, 20, 50],
+      pageSizes: [10, 15, 30, 40, 60],
       treeLoading: false,
       options: {
+        height: "calc(100% - 62px)",
         mutiSelect: false,
         index: true, // 显示序号， 多选则 mutiSelect
         loading: false, // 表格动画
@@ -200,7 +207,8 @@ export default {
     addOrg() {
       this.$refs.saveOrgDialog.open();
     },
-    editOrg(data) {
+    editOrg(data, node) {
+      console.log(node);
       this.$refs.saveOrgDialog.open(data);
     },
     delOrg(data) {
@@ -251,7 +259,7 @@ export default {
       this.pagination = {
         total: 0,
         pageIndex: 1,
-        pageSize: 12
+        pageSize: 15
       };
       this.getTabData();
     },

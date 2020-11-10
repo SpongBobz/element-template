@@ -15,7 +15,7 @@ module.exports = {
   //如果你不需要生产环境的 source map，可以将其设置为 false 以加速生产环境构建。
   productionSourceMap: false,
   devServer: {
-    port: 3000,
+    port: 3003,
     proxy: {
       "^/Api": {
         target: "http://192.168.2.20:8899",
@@ -35,6 +35,15 @@ module.exports = {
         // 所以这里假设你有 `src/variables.scss` 这个文件
         prependData: `@import "~@/style/variables.scss";@import "~@/style/mixin.scss";`
       }
+    }
+  },
+  pwa: {
+    iconPaths: {
+      favicon32: "favicon.ico",
+      favicon16: "favicon.ico",
+      appleTouchIcon: "favicon.ico",
+      maskIcon: "favicon.ico",
+      msTileImage: "favicon.ico"
     }
   }
 };

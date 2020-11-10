@@ -23,37 +23,40 @@
         >
       </el-form-item>
     </el-form>
-    <Com-Table
-      :columns="columns"
-      :dataSource="tableData"
-      :options="options"
-      :fetch="getTabData"
-      :pagination="pagination"
-      :pageSizes="pageSizes"
-    >
-      <template slot="func" slot-scope="scoped">
-        <el-button
-          size="mini"
-          @click="editUser(scoped.row)"
-          type="success"
-          icon="el-icon-edit"
-          style="margin-right: 5px"
-          >编辑</el-button
-        >
-        <el-popconfirm
-          :title="`是否确认删除角色 ${scoped.row.DisplayName} ？`"
-          @confirm="delRole(scoped.row)"
-          ><el-button
-            slot="reference"
-            @click.stop.prevent
+    <div class="tab-content">
+      <Com-Table
+        :columns="columns"
+        :dataSource="tableData"
+        :options="options"
+        :fetch="getTabData"
+        :pagination="pagination"
+        :pageSizes="pageSizes"
+        style="height: 100%"
+      >
+        <template slot="func" slot-scope="scoped">
+          <el-button
             size="mini"
-            type="danger"
-            icon="el-icon-delete"
-            >删除</el-button
+            @click="editUser(scoped.row)"
+            type="success"
+            icon="el-icon-edit"
+            style="margin-right: 5px"
+            >编辑</el-button
           >
-        </el-popconfirm>
-      </template>
-    </Com-Table>
+          <el-popconfirm
+            :title="`是否确认删除角色 ${scoped.row.DisplayName} ？`"
+            @confirm="delRole(scoped.row)"
+            ><el-button
+              slot="reference"
+              @click.stop.prevent
+              size="mini"
+              type="danger"
+              icon="el-icon-delete"
+              >删除</el-button
+            >
+          </el-popconfirm>
+        </template>
+      </Com-Table>
+    </div>
     <SaveRoleDiaolg @change="getTabData" ref="roleDialog" />
   </div>
 </template>
@@ -117,11 +120,12 @@ export default {
       pagination: {
         total: 0,
         pageIndex: 1,
-        pageSize: 12
+        pageSize: 15
       },
-      pageSizes: [12, 14, 20, 50],
+      pageSizes: [10, 15, 30, 40, 60],
       treeLoading: false,
       options: {
+        height: "calc(100% - 62px)",
         mutiSelect: false,
         index: true, // 显示序号， 多选则 mutiSelect
         loading: false, // 表格动画
@@ -157,7 +161,7 @@ export default {
       this.pagination = {
         total: 0,
         pageIndex: 1,
-        pageSize: 12
+        pageSize: 15
       };
       this.getTabData();
     },

@@ -54,31 +54,32 @@
       <el-form-item>
         <el-button type="primary" @click="queryBtn">查询</el-button>
         <el-button class="reset" @click="reset">重置</el-button>
-      </el-form-item>
-      <el-form-item>
         <el-button icon="el-icon-download" type="primary" @click="exportData"
           >导出</el-button
         >
       </el-form-item>
     </el-form>
-    <Com-Table
-      :columns="columns"
-      :dataSource="tableData"
-      :options="options"
-      :fetch="getTabData"
-      :pagination="pagination"
-      :pageSizes="pageSizes"
-    >
-      <template slot="func" slot-scope="scoped">
-        <el-button
-          size="mini"
-          @click="viewLog(scoped.row)"
-          type="primary"
-          style="margin-right: 5px"
-          >查看</el-button
-        >
-      </template>
-    </Com-Table>
+    <div class="tab-content">
+      <Com-Table
+        :columns="columns"
+        :dataSource="tableData"
+        :options="options"
+        :fetch="getTabData"
+        :pagination="pagination"
+        :pageSizes="pageSizes"
+        style="height: 100%"
+      >
+        <template slot="func" slot-scope="scoped">
+          <el-button
+            size="mini"
+            @click="viewLog(scoped.row)"
+            type="primary"
+            style="margin-right: 5px"
+            >查看</el-button
+          >
+        </template>
+      </Com-Table>
+    </div>
     <InfoDialog @change="getTabData" ref="infoDialog" />
   </div>
 </template>
@@ -135,11 +136,12 @@ export default {
       pagination: {
         total: 0,
         pageIndex: 1,
-        pageSize: 12
+        pageSize: 15
       },
-      pageSizes: [12, 14, 20, 50],
+      pageSizes: [10, 15, 30, 40, 60],
       treeLoading: false,
       options: {
+        height: "calc(100% - 62px)",
         mutiSelect: false,
         index: true, // 显示序号， 多选则 mutiSelect
         loading: false, // 表格动画
@@ -214,7 +216,7 @@ export default {
       this.pagination = {
         total: 0,
         pageIndex: 1,
-        pageSize: 12
+        pageSize: 15
       };
       this.getTabData();
     },
@@ -257,5 +259,6 @@ export default {
   padding: 6px 20px;
   position: relative;
   overflow: auto;
+  min-width: 1350px;
 }
 </style>
