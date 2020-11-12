@@ -54,8 +54,8 @@ const actions = {
     return await getUser().then(res => {
       if (res.Success) {
         let data = res.Data;
-        if (data.Module && data.Module.length) {
-          data.Module = data.Module.map(item => {
+        if (data.Module[0] && data.Module[0].Child.length) {
+          data.Module = data.Module[0].Child.map(item => {
             return { ...item, url: item.Name.substring(4).toLowerCase() };
           });
           commit("_setUser", data);

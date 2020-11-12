@@ -5,7 +5,7 @@ export function login(data) {
   return request.post("/Api/Token/Login", data);
 }
 export function getUser() {
-  return request.get("/Api/SysUser/GetUserInfo");
+  return request.get("/Api/SysUser/GetUserInfo?id=1");
 }
 export function getUserList(data) {
   return request.get(`/Api/SysUser/GetList${getParamsFormat(data)}`);

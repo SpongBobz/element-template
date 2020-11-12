@@ -8,6 +8,6 @@ var geodp = geodp || {};
     // 请求超时设置时间 （ms）
     requestTimeout: 30000,
     // api地址
-    baseAPI: "http://192.168.2.20:8899"
+    baseAPI: "http://192.168.2.13:9022"
   };
 })();
